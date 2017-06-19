@@ -300,13 +300,13 @@ void inverseKinematicsInterface() {
 }
 
 public void sendForward() {
-  int base = Integer.parseInt(cp5.get(Textfield.class, "base").getText());
+  int base = (cp5.get(Textfield.class, "base").getText().isEmpty()) ? 0 : Integer.parseInt(cp5.get(Textfield.class, "base").getText());
   if (checkboxForward.getItem(0).getState()) base *= -1;
-  int shoulder = Integer.parseInt(cp5.get(Textfield.class, "shoulder").getText());
+  int shoulder = (cp5.get(Textfield.class, "shoulder").getText().isEmpty()) ? 0 : Integer.parseInt(cp5.get(Textfield.class, "shoulder").getText());
   if (checkboxForward.getItem(1).getState()) shoulder *= -1;
-  int elbow = Integer.parseInt(cp5.get(Textfield.class, "elbow").getText());
+  int elbow = (cp5.get(Textfield.class, "elbow").getText().isEmpty()) ? 0 : Integer.parseInt(cp5.get(Textfield.class, "elbow").getText());
   if (checkboxForward.getItem(2).getState()) elbow *= -1;
-  int hand = Integer.parseInt(cp5.get(Textfield.class, "hand").getText());
+  int hand = (cp5.get(Textfield.class, "hand").getText().isEmpty()) ? 0 : Integer.parseInt(cp5.get(Textfield.class, "hand").getText());
   if (checkboxForward.getItem(3).getState()) hand *= -1;
   
   servos.get(0).setNextVal(round(servos.get(0).getZero() + base*servos.get(0).getMulFactor()));

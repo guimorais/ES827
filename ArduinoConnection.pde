@@ -56,7 +56,6 @@ void moveServo(){
       command = command.concat(round(servos.get(i).getTrajectory(j)) + ",");
     }
     i=0;
-    println(command);
     myPort.write(command);
     loop();
     forwardKinematics((servos.get(0).getTrajectory(j)-servos.get(0).getZero())*PI/180,(servos.get(1).getTrajectory(j)-servos.get(1).getZero())*PI/180,-(servos.get(3).getTrajectory(j)-servos.get(3).getZero())*PI/180,(servos.get(4).getTrajectory(j)-servos.get(4).getZero())*PI/180);
