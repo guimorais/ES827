@@ -1,10 +1,7 @@
 void setValForward(int base, int shoulder, int elbow, int hand){
   
-  forwardKinematics(base*PI/180, shoulder*PI/180, elbow*PI/180, hand*PI/180);
-  
   setStep();
   setTrajectory();
-  setMatrixText();
   moveServo();
   setCurVal();
   myPort.clear();

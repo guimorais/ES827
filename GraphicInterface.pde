@@ -309,13 +309,15 @@ public void sendForward() {
   int hand = Integer.parseInt(cp5.get(Textfield.class, "hand").getText());
   if (checkboxForward.getItem(3).getState()) hand *= -1;
   
-  servos.get(0).setNextVal(servos.get(0).getZero() + base);
-  servos.get(1).setNextVal(servos.get(1).getZero() + shoulder);
+  servos.get(0).setNextVal(round(servos.get(0).getZero() + base*servos.get(0).getMulFactor()));
+  servos.get(1).setNextVal(round(servos.get(1).getZero() + shoulder*servos.get(1).getMulFactor()));
   servos.get(2).setNextVal(servos.get(2).getMax()+servos.get(2).getMin()-servos.get(1).getNextVal());
-  servos.get(3).setNextVal(servos.get(3).getZero() - elbow);
-  servos.get(4).setNextVal(servos.get(4).getZero() + hand);
+  servos.get(3).setNextVal(round(servos.get(3).getZero() - elbow*servos.get(3).getMulFactor()));
+  servos.get(4).setNextVal(round(servos.get(4).getZero() + hand*servos.get(4).getMulFactor()));
   
+  forwardKinematics(base*PI/180, shoulder*PI/180, elbow*PI/180, hand*PI/180);
   adjustNextVal();
+  setMatrixText();
   setValForward(servos.get(0).getNextVal(), servos.get(1).getNextVal(), servos.get(3).getNextVal(), servos.get(4).getNextVal());
 }
 

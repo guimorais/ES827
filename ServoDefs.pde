@@ -12,15 +12,17 @@ public class ServoDefs {
   private int curVal;
   private int nextVal;
   private int numSteps;
+  private float mulFactor;
   private float step;
   private float[] trajectory;
 
-  ServoDefs(int pin, int zero, int min, int max) {
+  ServoDefs(int pin, int zero, int min, int max, float mulFactor) {
     this.pin = pin;
     this.zero = zero;
     this.min = min;
     this.max = max;
     this.curVal = zero;
+    this.mulFactor = mulFactor;
     this.nextVal = 0;
     this.numSteps = 0;
     this.step = 0;
@@ -58,6 +60,10 @@ public class ServoDefs {
   public float getStep() {
     return this.step;
   }
+  
+  public float getMulFactor() {
+    return mulFactor;
+  }
 
   public void setCurVal(int curVal) {
     this.curVal = curVal;
@@ -90,15 +96,15 @@ public class ServoDefs {
 
 public ArrayList<ServoDefs> setServos() {
   ArrayList<ServoDefs> servos = new ArrayList<ServoDefs>();
-  servos.add(new ServoDefs(8, 72, 0, 178));
-  servos.add(new ServoDefs(9, 68, 29, 113));
-  servos.add(new ServoDefs(10, 74, 29, 113));
-  servos.add(new ServoDefs(11, 98, 23, 180));
-  servos.add(new ServoDefs(12, 75, 0, 170));
+  servos.add(new ServoDefs(8, 72, 0, 178, 1));
+  servos.add(new ServoDefs(9, 68, 0, 142, 0.8));
+  servos.add(new ServoDefs(10, 74, 0, 142, 0.8));
+  servos.add(new ServoDefs(11, 100, 0, 180, 0.85));
+  servos.add(new ServoDefs(12, 75, 0, 180, 1));
 
   return servos;
 }
 
 public ServoDefs setGripper() {
-  return new ServoDefs(13, 105, 105, 180);
+  return new ServoDefs(13, 105, 105, 180, 1);
 }
