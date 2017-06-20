@@ -22,7 +22,7 @@ void inverseKinematics(float x, float y, float z, char side) {
     D1 = sqrt(1-D*D);
   }
   
-  float t1 = atan2(y,x);
+  float t1 = atan2(y,(x>0) ? x : -x);
   float t3 = atan2(D1,D);
   float t2 = PI/2 - (atan2(z-0.06,sqrt(x*x+y*y))+atan2(0.07*sin(t3),0.1+0.07*cos(t3)));
   
@@ -31,27 +31,45 @@ void inverseKinematics(float x, float y, float z, char side) {
   int theta3 = round(t3*180/PI);
   int theta4 = 0;
   
-  if(side == 'u' || side == 'U'){
-    theta4 = - theta2 - theta3;
-  } else if(side == 'f' || side == 'F') {
-    theta4 = 90 - theta2 - theta3;
-  } else if(side == 'd' || side == 'D') {
-    theta4 = 180 - theta2 - theta3;
-  } else if(side == 'b' || side == 'B') {
-    theta4 = -90 - theta2 - theta3;
+  if(x>0){
+    if(side == 'u' || side == 'U'){
+      theta4 = - theta2 - theta3;
+    } else if(side == 'f' || side == 'F') {
+      theta4 = 90 - theta2 - theta3;
+    } else if(side == 'd' || side == 'D') {
+      theta4 = 180 - theta2 - theta3;
+    } else if(side == 'b' || side == 'B') {
+      theta4 = -90 - theta2 - theta3;
+    }
+    servos.get(0).setNextVal(round(servos.get(0).getZero() + theta1*servos.get(0).getMulFactor()));
+    servos.get(1).setNextVal(round(servos.get(1).getZero() + theta2*servos.get(1).getMulFactor()));
+    servos.get(2).setNextVal(servos.get(2).getMax()+servos.get(2).getMin()-servos.get(1).getNextVal());
+    servos.get(3).setNextVal(round(servos.get(3).getZero() - theta3*servos.get(3).getMulFactor()));
+    servos.get(4).setNextVal(round(servos.get(4).getZero() + theta4*servos.get(4).getMulFactor()));
+    
+  } else {
+    if(side == 'd' || side == 'D'){
+      theta4 = - theta2 - theta3;
+    } else if(side == 'b' || side == 'B') {
+      theta4 = 90 - theta2 - theta3;
+    } else if(side == 'u' || side == 'U') {
+      theta4 = 180 - theta2 - theta3;
+    } else if(side == 'f' || side == 'F') {
+      theta4 = -90 - theta2 - theta3;
+    }
+    servos.get(0).setNextVal(round(servos.get(0).getZero() - theta1*servos.get(0).getMulFactor()));
+    servos.get(1).setNextVal(round(servos.get(1).getZero() - theta2*servos.get(1).getMulFactor()));
+    servos.get(2).setNextVal(servos.get(2).getMax()+servos.get(2).getMin()-servos.get(1).getNextVal());
+    servos.get(3).setNextVal(round(servos.get(3).getZero() + theta3*servos.get(3).getMulFactor()));
+    servos.get(4).setNextVal(round(servos.get(4).getZero() - theta4*servos.get(4).getMulFactor()));
   }
+ 
     
   //servos.get(0).setNextVal(servos.get(0).getZero() + theta1);
   //servos.get(1).setNextVal(servos.get(1).getZero() + theta2);
   //servos.get(2).setNextVal(servos.get(2).getMax() + servos.get(2).getMin() - servos.get(1).getNextVal());
   //servos.get(3).setNextVal(servos.get(3).getZero() - theta3);
   //servos.get(4).setNextVal(servos.get(4).getZero() + theta4);
-  
-  servos.get(0).setNextVal(round(servos.get(0).getZero() + theta1*servos.get(0).getMulFactor()));
-  servos.get(1).setNextVal(round(servos.get(1).getZero() + theta2*servos.get(1).getMulFactor()));
-  servos.get(2).setNextVal(servos.get(2).getMax()+servos.get(2).getMin()-servos.get(1).getNextVal());
-  servos.get(3).setNextVal(round(servos.get(3).getZero() - theta3*servos.get(3).getMulFactor()));
-  servos.get(4).setNextVal(round(servos.get(4).getZero() + theta4*servos.get(4).getMulFactor()));
   
   
   forwardKinematics(t1, t2, t3, theta4*PI/180);
