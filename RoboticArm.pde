@@ -14,6 +14,14 @@ void setup()
   servos = setServos();
   gripper = setGripper();
   startServos();
+  
+      setTrajectoryNode(72,68,100,75,1);
+    setTrajectoryNode(72,90,26,141,1);
+    setTrajectoryNode(72,90,26,141,-1);
+    setTrajectoryNode(72,87,42,163,-1);
+    setTrajectoryNode(27,59,152,57,-1);
+    setTrajectoryNode(27,59,152,57,1);
+    setTrajectoryNode(72,68,100,75,1);
 
   win = new PWindow();
 }

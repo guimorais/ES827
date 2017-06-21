@@ -7,6 +7,29 @@ void setCurVal() {
   }
 }
 
+void setTrajectoryNode(int base, int shoulder, int elbow, int hand) {
+  servos.get(0).addNode(base);
+  servos.get(1).addNode(shoulder);
+  servos.get(2).addNode(servos.get(2).getMax()+servos.get(2).getMin()-shoulder);
+  servos.get(3).addNode(elbow);
+  servos.get(4).addNode(hand);
+  
+  if(gripper.getCurVal() > 150){
+    gripper.addNode(-1);
+  } else {
+    gripper.addNode(1);
+  }
+}
+
+void setTrajectoryNode(int base, int shoulder, int elbow, int hand, int gripperNode) {
+  servos.get(0).addNode(base);
+  servos.get(1).addNode(shoulder);
+  servos.get(2).addNode(servos.get(2).getMax()+servos.get(2).getMin()-shoulder);
+  servos.get(3).addNode(elbow);
+  servos.get(4).addNode(hand);
+  gripper.addNode(gripperNode);
+}
+
 void startServos() {
   myPort.write("F0,0,0,0,0");
 }

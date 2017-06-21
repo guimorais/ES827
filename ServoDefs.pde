@@ -15,6 +15,7 @@ public class ServoDefs {
   private float mulFactor;
   private float step;
   private float[] trajectory;
+  public ArrayList<Float> trajectoryNodes;
 
   ServoDefs(int pin, int zero, int min, int max, float mulFactor) {
     this.pin = pin;
@@ -27,6 +28,23 @@ public class ServoDefs {
     this.numSteps = 0;
     this.step = 0;
     this.trajectory = new float[60];
+    this.trajectoryNodes = new ArrayList<Float>();
+  }
+
+  public void addNode(float node) {
+    this.trajectoryNodes.add(node);
+  }
+  
+  public float removeNode() {
+    return this.trajectoryNodes.remove(0);
+  }
+  
+  public float getNode(int index) {
+    return this.trajectoryNodes.get(index);
+  }
+  
+  public void clearNodes() {
+    this.trajectoryNodes = new ArrayList<Float>();
   }
 
   public int getPin() {
@@ -68,7 +86,7 @@ public class ServoDefs {
   public void setCurVal(int curVal) {
     this.curVal = curVal;
   }
-
+  
   public void setNextVal(int nextVal) {
     this.nextVal = nextVal;
   }

@@ -19,13 +19,7 @@ void defaultInterface() {
     .setPosition(50, 300)
     .setSize(180, 40)
     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Inverse Kinematics")
-    ;
-    
-  cp5.addBang("saveTrajectoryInterface")
-    .setPosition(50, 500)
-    .setSize(180, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Save Trajectory")
-    ;    
+    ;   
 }
 
 void clearInterface() {
@@ -37,15 +31,9 @@ void clearInterface() {
 void forwardKinematicsInterface() {
   clearInterface();
   cp5.addBang("inverseKinematicsInterface")
-    .setPosition(250, 30)
-    .setSize(180, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Inverse Kinematics")
-    ;
-
-  cp5.addBang("saveTrajectoryInterface")
     .setPosition(50, 30)
     .setSize(180, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Save Trajectory")
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Inverse Kinematics")
     ;
 
   checkboxForward = cp5.addCheckBox("minus")
@@ -162,7 +150,25 @@ void forwardKinematicsInterface() {
     .setSize(80, 40)
     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Send")
     ;
-
+    
+  cp5.addBang("savePosition")
+    .setPosition(230, 500)
+    .setSize(80, 40)
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Save Trajectory")
+    ;
+    
+  cp5.addBang("clearTrajectory")
+    .setPosition(330, 500)
+    .setSize(80, 40)
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Clear Trajectory")
+    ;
+  
+  cp5.addBang("executeTrajectory")
+    .setPosition(275, 440)
+    .setSize(90, 40)
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Execute Trajectory")
+    ;
+  
   textFont(font);
 }
 
@@ -170,15 +176,9 @@ void forwardKinematicsInterface() {
 void inverseKinematicsInterface() {
   clearInterface();
   cp5.addBang("forwardKinematicsInterface")
-    .setPosition(250, 30)
-    .setSize(180, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Forward Kinematics")
-    ;
-
-  cp5.addBang("saveTrajectoryInterface")
     .setPosition(50, 30)
     .setSize(180, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Save Trajectory")
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Forward Kinematics")
     ;
 
   checkboxInverse = cp5.addCheckBox("minusInverse")
@@ -283,7 +283,25 @@ void inverseKinematicsInterface() {
     .setPosition(130, 500)
     .setSize(80, 40)
     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Send")
-    ;    
+    ;
+    
+  cp5.addBang("savePosition")
+    .setPosition(230, 500)
+    .setSize(80, 40)
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Save Trajectory")
+    ;
+    
+  cp5.addBang("clearTrajectory")
+    .setPosition(330, 500)
+    .setSize(80, 40)
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Clear Trajectory")
+    ;
+  
+  cp5.addBang("executeTrajectory")
+    .setPosition(275, 440)
+    .setSize(90, 40)
+    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Execute Trajectory")
+    ;
 
   radioGripperDir = cp5.addRadioButton("radioButton")
     .setPosition(30, 420)
@@ -304,70 +322,6 @@ void inverseKinematicsInterface() {
   
   textFont(font);
 }
-
-int baseSliderValue = 0;
-int shoulderSliderValue = 0;
-int elbowSliderValue = 0;
-int handSliderValue = 0;
-int sliderTicksValue = 1;
-Slider baseSlider, shoulderSlider, elbowSlider, handSlider;
-
-
-void saveTrajectoryInterface() {
-  clearInterface();
-  cp5.addBang("forwardKinematicsInterface")
-    .setPosition(250, 30)
-    .setSize(180, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Forward Kinematics")
-    ;    
-
-  cp5.addBang("inverseKinematicsInterface")
-    .setPosition(50, 30)
-    .setSize(180, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Inverse Kinematics")
-    ;
-    
-  cp5.addSlider("baseSliderValue")
-     .setPosition(50,120)
-     .setRange(-90,90)
-     .setSize(200,20)
-     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE).setText("Base")
-     ;
-     
-  cp5.addSlider("shoulderSliderValue")
-     .setPosition(50,180)
-     .setRange(-90,90)
-     .setSize(200,20)
-     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE).setText("Shoulder")
-     ;
-     
-  cp5.addSlider("elbowSliderValue")
-     .setPosition(50,240)
-     .setRange(-90,90)
-     .setSize(200,20)
-     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE).setText("Elbow")
-     ;
-     
-  cp5.addSlider("handSliderValue")
-     .setPosition(50,300)
-     .setRange(-90,90)
-     .setSize(200,20)
-     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE).setText("Hand")
-     ;
-  
-  cp5.addBang("moveToPosition")
-    .setPosition(300, 160)
-    .setSize(120, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Move To Position")
-    ;
-  
-  cp5.addBang("saveTrajectory")
-    .setPosition(300, 240)
-    .setSize(120, 40)
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setText("Save Trajectory")
-    ;
-}
-
 
 public void sendForward() {
   int base = (cp5.get(Textfield.class, "base").getText().isEmpty()) ? 0 : Integer.parseInt(cp5.get(Textfield.class, "base").getText());
