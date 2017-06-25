@@ -31,7 +31,7 @@ void inverseKinematics(float x, float y, float z, char side) {
   int theta3 = round(t3*180/PI);
   int theta4 = 0;
   
-  if(x>0){
+  if(x>=0){
     if(side == 'u' || side == 'U'){
       theta4 = - theta2 - theta3;
     } else if(side == 'f' || side == 'F') {
@@ -48,14 +48,14 @@ void inverseKinematics(float x, float y, float z, char side) {
     servos.get(4).setNextVal(round(servos.get(4).getZero() + theta4*servos.get(4).getMulFactor()));
     
   } else {
-    if(side == 'd' || side == 'D'){
-      theta4 = - theta2 - theta3;
-    } else if(side == 'b' || side == 'B') {
-      theta4 = 90 - theta2 - theta3;
-    } else if(side == 'u' || side == 'U') {
+     if(side == 'd' || side == 'D'){
       theta4 = 180 - theta2 - theta3;
-    } else if(side == 'f' || side == 'F') {
+    } else if(side == 'b' || side == 'B') {
       theta4 = -90 - theta2 - theta3;
+    } else if(side == 'u' || side == 'U') {
+      theta4 =  - theta2 - theta3;
+    } else if(side == 'f' || side == 'F') {
+      theta4 = 90 - theta2 - theta3;
     }
     servos.get(0).setNextVal(round(servos.get(0).getZero() - theta1*servos.get(0).getMulFactor()));
     servos.get(1).setNextVal(round(servos.get(1).getZero() - theta2*servos.get(1).getMulFactor()));

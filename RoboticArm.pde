@@ -15,13 +15,29 @@ void setup()
   gripper = setGripper();
   startServos();
   
-      setTrajectoryNode(72,68,100,75,1);
+    /*setTrajectoryNode(72,68,100,75,1);
     setTrajectoryNode(72,90,26,141,1);
     setTrajectoryNode(72,90,26,141,-1);
     setTrajectoryNode(72,87,42,163,-1);
     setTrajectoryNode(27,59,152,57,-1);
     setTrajectoryNode(27,59,152,57,1);
-    setTrajectoryNode(72,68,100,75,1);
+    setTrajectoryNode(72,68,100,75,1);*/
+
+    /*setTrajectoryNode(72,68,98,75,1);
+    setTrajectoryNode(72,104,44,156,1);
+    setTrajectoryNode(72,104,44,156,-1);
+    setTrajectoryNode(72,74,33,180,-1);
+    setTrajectoryNode(45,78,40,180,-1);
+    setTrajectoryNode(41,90,37,166,-1);
+    setTrajectoryNode(41,90,37,166,1);
+    setTrajectoryNode(0,68,98,75,1);*/
+    
+    setTrajectoryNode(72,68,98,75,1);
+    setTrajectoryNode(72,104,44,156,1);
+    setTrajectoryNode(72,104,44,156,-1);
+    setTrajectoryNode(41,46,150,65,-1);
+    setTrajectoryNode(41,46,150,65,1);
+    setTrajectoryNode(72,68,98,75,1);
 
   win = new PWindow();
 }
@@ -54,30 +70,37 @@ class PWindow extends PApplet {
 
     fill(#FF9F03);
 
+    int xmin = -80;
+    int xmax = 320;
+    int ymin = 100;
+    int ymax = 500;
+    int zmin = -200;
+    int zmax = 260;
+
     stroke(255);
     strokeWeight(1);
     rotateX(0.7);
     rotateZ(-0.5);
-    for (int i = -20; i < 220; i+=gridSize) {
-      for (int j = 200; j < 460; j+=gridSize) {
-        line(i, j, -200, i+gridSize, j, -200);
-        line(i, j, -200, i, j+gridSize, -200);
+    for (int i = xmin; i < xmax; i+=gridSize) {
+      for (int j = ymin; j < ymax; j+=gridSize) {
+        line(i, j, zmin, i+gridSize, j, zmin);
+        line(i, j, zmin, i, j+gridSize, zmin);
       }
     }
-    line(-20, 460, -200, 220, 460, -200);
-    line(220, 460, -200, 220, 460, 260);
+    line(xmin, ymax, zmin, xmax, ymax, zmin);
+    line(xmax, ymax, zmin, xmax, ymax, zmax);
 
-    for (int i = -20; i < 220; i+=gridSize) {
-      for (int k = -200; k < 260; k+=gridSize) {
-        line(i, 200, k, i+gridSize, 200, k);
-        line(i, 200, k, i, 200, k+gridSize);
+    for (int i = xmin; i < xmax; i+=gridSize) {
+      for (int k = zmin; k < zmax; k+=gridSize) {
+        line(i, ymin, k, i+gridSize, ymin, k);
+        line(i, ymin, k, i, ymin, k+gridSize);
       }
     }
 
-    for (int j = 200; j < 460; j+=gridSize) {
-      for (int k = -200; k < 260; k+=gridSize) {
-        line(220, j, k, 220, j+gridSize, k);
-        line(220, j, k, 220, j, k+gridSize);
+    for (int j = ymin; j < ymax; j+=gridSize) {
+      for (int k = zmin; k < zmax; k+=gridSize) {
+        line(xmax, j, k, xmax, j+gridSize, k);
+        line(xmax, j, k, xmax, j, k+gridSize);
       }
     }
 

@@ -68,7 +68,7 @@ void clearSerial(){
 void closeActuator(){
   Serial.println("Aqui");
   for(int i=0; i<20; i++){
-    servo[5].write(100 + 4*i);
+    servo[5].write(100 + 3*i);
     delay(40);
   }
   Serial.println("closed");
@@ -77,7 +77,7 @@ void closeActuator(){
 
 void openActuator(){
   for(int i=0; i<20; i++){
-    servo[5].write(180 - 4*i);
+    servo[5].write(160 - 3*i);
     delay(40);
   }
   Serial.println("opened");

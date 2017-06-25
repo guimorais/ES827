@@ -14,7 +14,7 @@ void setTrajectoryNode(int base, int shoulder, int elbow, int hand) {
   servos.get(3).addNode(elbow);
   servos.get(4).addNode(hand);
   
-  if(gripper.getCurVal() > 150){
+  if(gripper.getCurVal() > 110){
     gripper.addNode(-1);
   } else {
     gripper.addNode(1);

@@ -38,10 +38,10 @@ void forwardKinematics(float theta1, float theta2, float theta3, float theta4){
   }
   
   float[][] H12 = {
-    {cos(theta2 - PI/2)*cos(theta1), -1*cos(theta1)*sin(theta2 - PI/2),    -1.0*sin(theta1), 0.1*cos(theta2 - PI/2)*cos(theta1)},
-    {cos(theta2 - PI/2)*sin(theta1), -1.0*sin(theta2 - PI/2)*sin(theta1),  1.0*cos(theta1),  0.1*cos(theta2 - PI/2)*sin(theta1)},
-    {-1.0*sin(theta2 - PI/2),        -1.0*cos(theta2 - PI/2),              0,                0.06 - 0.1*sin(theta2 - PI/2)},
-    {0,                              0,                                    0,                1.0}
+    {cos(theta2 - PI/2)*cos(theta1), -cos(theta1)*sin(theta2 - PI/2),  -sin(theta1), 0.1*cos(theta2 - PI/2)*cos(theta1)},
+    {cos(theta2 - PI/2)*sin(theta1), -sin(theta2 - PI/2)*sin(theta1),  cos(theta1),  0.1*cos(theta2 - PI/2)*sin(theta1)},
+    {-sin(theta2 - PI/2),            -cos(theta2 - PI/2),              0,            0.06 - 0.1*sin(theta2 - PI/2)},
+    {0,                              0,                                0,            1.0}
   };
   
   sh2r = "";
@@ -59,10 +59,10 @@ void forwardKinematics(float theta1, float theta2, float theta3, float theta4){
   
   
   float[][] H123 = {
-    { cos(theta2 - PI/2)*cos(theta1)*cos(theta3) - 1.0*cos(theta1)*sin(theta2 - PI/2)*sin(theta3), - 1.0*cos(theta2 - PI/2)*cos(theta1)*sin(theta3) - 1.0*cos(theta1)*cos(theta3)*sin(theta2 - PI/2), -1.0*sin(theta1), 0.1*cos(theta2 - PI/2)*cos(theta1) - 0.07*cos(theta1)*sin(theta2 - PI/2)*sin(theta3) + 0.07*cos(theta2 - PI/2)*cos(theta1)*cos(theta3)},
-    { cos(theta2 - PI/2)*cos(theta3)*sin(theta1) - 1.0*sin(theta2 - PI/2)*sin(theta1)*sin(theta3), - 1.0*cos(theta2 - PI/2)*sin(theta1)*sin(theta3) - 1.0*cos(theta3)*sin(theta2 - PI/2)*sin(theta1),  1.0*cos(theta1), 0.1*cos(theta2 - PI/2)*sin(theta1) - 0.07*sin(theta2 - PI/2)*sin(theta1)*sin(theta3) + 0.07*cos(theta2 - PI/2)*cos(theta3)*sin(theta1)},
-    {                   - 1.0*cos(theta2 - PI/2)*sin(theta3) - 1.0*cos(theta3)*sin(theta2 - PI/2),                           1.0*sin(theta2 - PI/2)*sin(theta3) - 1.0*cos(theta2 - PI/2)*cos(theta3),                0,                              0.06 - 0.07*cos(theta2 - PI/2)*sin(theta3) - 0.07*cos(theta3)*sin(theta2 - PI/2) - 0.1*sin(theta2 - PI/2)},
-    { 0,0,0,1.0}
+    { cos(theta2 + theta3 - PI/2)*cos(theta1), -sin(theta2 + theta3 - PI/2)*cos(theta1), -sin(theta1), (cos(theta1)*(7.0*cos(theta2 + theta3 - PI/2) + 10.0*cos(theta2 - PI/2)))/100},
+    { cos(theta2 + theta3 - PI/2)*sin(theta1), -sin(theta2 + theta3 - PI/2)*sin(theta1), cos(theta1),  (sin(theta1)*(7.0*cos(theta2 + theta3 - PI/2) + 10.0*cos(theta2 - PI/2)))/100},
+    { -sin(theta2 + theta3 - PI/2),            -cos(theta2 + theta3 - PI/2),             0,            0.06 - 0.1*sin(theta2 - PI/2) - 0.07*sin(theta2 + theta3 - PI/2)},
+    { 0,                                       0,                                        0,            1.0}
   };
   
   sh3r = "";
@@ -80,10 +80,10 @@ void forwardKinematics(float theta1, float theta2, float theta3, float theta4){
   
   
   float[][] H1234 = {
-    { - sin(theta4)*(1.0*cos(theta2 - PI/2)*cos(theta1)*sin(theta3) + 1.0*cos(theta1)*cos(theta3)*sin(theta2 - PI/2)) - cos(theta4)*(1.0*cos(theta1)*sin(theta2 - PI/2)*sin(theta3) - cos(theta2 - PI/2)*cos(theta1)*cos(theta3)), 1.0*sin(theta4)*(1.0*cos(theta1)*sin(theta2 - PI/2)*sin(theta3) - cos(theta2 - PI/2)*cos(theta1)*cos(theta3)) - cos(theta4)*(1.0*cos(theta2 - PI/2)*cos(theta1)*sin(theta3) + 1.0*cos(theta1)*cos(theta3)*sin(theta2 - PI/2)), -1.0*sin(theta1), 0.1*cos(theta2 - PI/2)*cos(theta1) - 0.09*sin(theta4)*(1.0*cos(theta2 - PI/2)*cos(theta1)*sin(theta3) + 1.0*cos(theta1)*cos(theta3)*sin(theta2 - PI/2)) - 0.09*cos(theta4)*(1.0*cos(theta1)*sin(theta2 - PI/2)*sin(theta3) - cos(theta2 - PI/2)*cos(theta1)*cos(theta3)) - 0.07*cos(theta1)*sin(theta2 - PI/2)*sin(theta3) + 0.07*cos(theta2 - PI/2)*cos(theta1)*cos(theta3)},
-    { - sin(theta4)*(1.0*cos(theta2 - PI/2)*sin(theta1)*sin(theta3) + 1.0*cos(theta3)*sin(theta2 - PI/2)*sin(theta1)) - cos(theta4)*(1.0*sin(theta2 - PI/2)*sin(theta1)*sin(theta3) - cos(theta2 - PI/2)*cos(theta3)*sin(theta1)), 1.0*sin(theta4)*(1.0*sin(theta2 - PI/2)*sin(theta1)*sin(theta3) - cos(theta2 - PI/2)*cos(theta3)*sin(theta1)) - cos(theta4)*(1.0*cos(theta2 - PI/2)*sin(theta1)*sin(theta3) + 1.0*cos(theta3)*sin(theta2 - PI/2)*sin(theta1)),  1.0*cos(theta1), 0.1*cos(theta2 - PI/2)*sin(theta1) - 0.09*sin(theta4)*(1.0*cos(theta2 - PI/2)*sin(theta1)*sin(theta3) + 1.0*cos(theta3)*sin(theta2 - PI/2)*sin(theta1)) - 0.09*cos(theta4)*(1.0*sin(theta2 - PI/2)*sin(theta1)*sin(theta3) - cos(theta2 - PI/2)*cos(theta3)*sin(theta1)) - 0.07*sin(theta2 - PI/2)*sin(theta1)*sin(theta3) + 0.07*cos(theta2 - PI/2)*cos(theta3)*sin(theta1)},
-    { - cos(theta4)*(1.0*cos(theta2 - PI/2)*sin(theta3) + 1.0*cos(theta3)*sin(theta2 - PI/2)) - sin(theta4)*(1.0*cos(theta2 - PI/2)*cos(theta3) - 1.0*sin(theta2 - PI/2)*sin(theta3)),                                             1.0*sin(theta4)*(1.0*cos(theta2 - PI/2)*sin(theta3) + 1.0*cos(theta3)*sin(theta2 - PI/2)) - cos(theta4)*(1.0*cos(theta2 - PI/2)*cos(theta3) - 1.0*sin(theta2 - PI/2)*sin(theta3)),                0,                                                                          0.06 - 0.07*cos(theta2 - PI/2)*sin(theta3) - 0.07*cos(theta3)*sin(theta2 - PI/2) - 0.09*cos(theta4)*(1.0*cos(theta2 - PI/2)*sin(theta3) + 1.0*cos(theta3)*sin(theta2 - PI/2)) - 0.09*sin(theta4)*(1.0*cos(theta2 - PI/2)*cos(theta3) - 1.0*sin(theta2 - PI/2)*sin(theta3)) - 0.1*sin(theta2 - PI/2)},
-    { 0,0,0,1.0}
+    { cos(theta2 + theta3 + theta4 - PI/2)*cos(theta1), -sin(theta2 + theta3 + theta4 - PI/2)*cos(theta1), -sin(theta1), 0.01*cos(theta1)*(7.0*cos(theta2 + theta3 - PI/2) + 9.0*cos(theta2 + theta3 + theta4 - PI/2) + 10.0*cos(theta2 - PI/2))},
+    { cos(theta2 + theta3 + theta4 - PI/2)*sin(theta1), -sin(theta2 + theta3 + theta4 - PI/2)*sin(theta1), cos(theta1),  0.01*sin(theta1)*(7.0*cos(theta2 + theta3 - PI/2) + 9.0*cos(theta2 + theta3 + theta4 - PI/2) + 10.0*cos(theta2 - PI/2))},
+    { -sin(theta2 + theta3 + theta4 - PI/2),            -cos(theta2 + theta3 + theta4 - PI/2),             0,            0.1*cos(theta2) - 0.07*sin(theta2 + theta3 - PI/2) - 0.09*sin(theta2 + theta3 + theta4 - PI/2) + 0.06},
+    { 0,                                                0,                                                 0,            1.0}
   };
   
   sh4r = "";

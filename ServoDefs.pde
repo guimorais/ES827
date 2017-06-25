@@ -117,12 +117,12 @@ public ArrayList<ServoDefs> setServos() {
   servos.add(new ServoDefs(8, 72, 0, 178, 1));
   servos.add(new ServoDefs(9, 68, 0, 142, 0.8));
   servos.add(new ServoDefs(10, 74, 0, 142, 0.8));
-  servos.add(new ServoDefs(11, 100, 0, 180, 0.85));
+  servos.add(new ServoDefs(11, 98, 0, 180, 1));
   servos.add(new ServoDefs(12, 75, 0, 180, 1));
 
   return servos;
 }
 
 public ServoDefs setGripper() {
-  return new ServoDefs(13, 105, 105, 180, 1);
+  return new ServoDefs(13, 105, 105, 115, 1);
 }
